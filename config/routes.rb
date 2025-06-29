@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  
   # Minimal auth for pet project — only sign in, sign out, sign up
   devise_for :users, skip: :all
 
