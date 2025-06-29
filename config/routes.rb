@@ -1,17 +1,20 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  
+  # Minimal auth for pet project — only sign in, sign out, sign up
+  devise_for :users, skip: :all
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  as :user do
+    devise_scope :user do
+      get    'users/sign_in',  to: 'devise/sessions#new',     as: :new_user_session
+      post   'users/sign_in',  to: 'devise/sessions#create',  as: :user_session
+      delete 'users/sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
+
+      get    'users/sign_up',  to: 'devise/registrations#new',    as: :new_user_registration
+      post   'users',          to: 'devise/registrations#create', as: :user_registration
+    end
+  end
+
   get 'up' => 'rails/health#show', as: :rails_health_check
-
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-
-  # Defines the root path route ("/")
-  # root "posts#index"
 end
