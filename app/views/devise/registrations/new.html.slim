@@ -1,0 +1,22 @@
+.container.d-flex.justify-content-center.align-items-center.min-vh-100 style="max-width: 400px;"
+  .w-100
+    h2.text-center.mb-4 Sign up
+
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      = render 'devise/shared/error_messages', resource: resource
+
+      .mb-3
+        = f.label :email, class: 'form-label'
+        = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control'
+
+      .mb-3
+        = f.label :password, class: 'form-label'
+        = f.password_field :password, autocomplete: 'new-password', class: 'form-control'
+
+      .mb-3
+        = f.label :password_confirmation, class: 'form-label'
+        = f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control'
+
+      = f.submit 'Sign up', class: 'btn btn-primary w-100'
+
+    = render 'devise/shared/links'
