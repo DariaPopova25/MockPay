@@ -24,4 +24,4 @@ jobs:
         run: bundle install
     
       - name: Run Slim Lint
-        run: bundle exec slim-lint -f github app/views
+        run: bundle exec slim-lint app/views
